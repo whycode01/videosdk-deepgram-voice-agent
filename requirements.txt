@@ -1,0 +1,8 @@
+asyncio==3.4.3
+numpy==1.26.4
+python-dotenv==1.0.1
+
+videosdk==0.0.6
+deepgram-sdk==3.4.0
+elevenlabs==1.9.0
+openai==1.50.2
