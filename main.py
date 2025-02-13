@@ -14,7 +14,7 @@ from agent.agent import AIInterviewer
 from dotenv import load_dotenv
 load_dotenv()
 loop = asyncio.new_event_loop()
-room_id = "6sqg-3ze1-4jgy"
+room_id = os.getenv("ROOM_ID")
 auth_token = os.getenv("AUTH_TOKEN")
 language = os.getenv("LANGUAGE", "en-US")
 stt_api_key = os.getenv("DEEPGRAM_API_KEY")
