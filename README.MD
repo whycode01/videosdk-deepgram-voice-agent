@@ -7,7 +7,7 @@ This project is an AI Voice Agent that uses VideoSDK for video conferencing, Dee
 ### Start with the project
 
 ```sh
-git clone https://github.com/videosdk-community/videosdk-deepgram-ai-bot.git
+git clone https://github.com/videosdk-community/videosdk-deepgram-voice-agent
 ```
 
 ### Client Setup
