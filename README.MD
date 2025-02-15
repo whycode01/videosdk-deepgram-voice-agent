@@ -11,7 +11,7 @@ git clone https://github.com/videosdk-community/videosdk-deepgram-voice-agent
 ```
 
 ```sh
-git clone https://github.com/videosdk-community/videosdk-deepgram-voice-agent
+cd videosdk-deepgram-voice-agent
 ```
 
 ### Client Setup
