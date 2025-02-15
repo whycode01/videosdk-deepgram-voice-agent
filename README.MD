@@ -10,11 +10,15 @@ This project is an AI Voice Agent that uses VideoSDK for video conferencing, Dee
 git clone https://github.com/videosdk-community/videosdk-deepgram-voice-agent
 ```
 
+```sh
+git clone https://github.com/videosdk-community/videosdk-deepgram-voice-agent
+```
+
 ### Client Setup
 
 1. Navigate to `client` dir:
    ```sh
-   cp client
+   cd client
    ```
 2. Make a copy of the environment configuration file:
    ```sh
