@@ -1,23 +1,22 @@
 from typing import Optional
-from openai import OpenAI, Stream
-from openai.types.chat import ChatCompletionChunk
-from tts.tts import TTS
-from intelligence.intelligence import Intelligence
 
-class OpenAIIntelligence(Intelligence):
-    def __init__(self, api_key: str, tts: TTS, base_url: Optional[str]="https://api.openai.com/v1", model: Optional[str] = None, system_prompt: Optional[str] = None):
-        self.client = OpenAI(
-            base_url=base_url,
+from groq import Groq
+
+from intelligence.intelligence import Intelligence
+from tts.tts import TTS
+
+
+class GroqIntelligence(Intelligence):
+    def __init__(self, api_key: str, tts: TTS, model: Optional[str] = None, system_prompt: Optional[str] = None):
+        self.client = Groq(
             api_key=api_key,
-            max_retries=3,
-        ).chat
+        )
 
         self.tts = tts
         self.system_prompt = "You are AI Interviewer and you are interviewing a candidate for a software engineering position."
         self.chat_history = []
-        self.model = model or "gpt-3.5-turbo"
+        self.model = model or "llama3-8b-8192"
         self.system_prompt = system_prompt or "You are AI Interviewer and you are interviewing a candidate for a software engineering position."
-
 
         self.pubsub = None
     
@@ -70,7 +69,7 @@ class OpenAIIntelligence(Intelligence):
 
         self.chat_history.append(ai_message)
 
-    def text_generator(self, response: Stream[ChatCompletionChunk]):
+    def text_generator(self, response):
        for chunk in response:
           content = chunk.choices[0].delta.content
           if content:
@@ -81,7 +80,7 @@ class OpenAIIntelligence(Intelligence):
         messages = self.build_messages(text, sender_name=sender_name)
 
         # generate llm completion
-        response = self.client.completions.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
             max_tokens=100,

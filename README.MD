@@ -1,6 +1,6 @@
 # AI Copilot with VideoSDK & Deepgram
 
-This project is an AI Voice Agent that uses VideoSDK for video conferencing, Deepgram for speech-to-text (STT), and OpenAI for language model (LLM) capabilities. The AI Copilot can join meetings, transcribe speech, and respond intelligently.
+This project is an AI Voice Agent that uses VideoSDK for video conferencing, Deepgram for speech-to-text (STT), and Groq for language model (LLM) capabilities. The AI Copilot can join meetings, transcribe speech, and respond intelligently.
 
 ![videoSDK + Deepgram Integration](https://assets.videosdk.live/images/videosdk-dg-integration.png)
 
@@ -36,7 +36,7 @@ cd videosdk-deepgram-voice-agent
    LANGUAGE=...
 
    DEEPGRAM_API_KEY=...  # (console.deepgram.com)
-   LLM_API_KEY=...  # (platform.openai.com/api-keys)
+   GROQ_API_KEY=...  # (console.groq.com)
    ```
 
 2. Create a virtual environment:

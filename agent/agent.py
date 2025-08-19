@@ -1,22 +1,18 @@
 import asyncio
-from videosdk import (
-    VideoSDK,
-    Meeting,
-    Participant,
-    MeetingEventHandler,
-    ParticipantEventHandler,
-)
 
 # types
-from videosdk import MeetingConfig, Stream, PubSubPublishConfig
+from videosdk import (Meeting, MeetingConfig, MeetingEventHandler, Participant,
+                      ParticipantEventHandler, PubSubPublishConfig, Stream,
+                      VideoSDK)
+from videosdk.stream import MediaStreamTrack
+
 from intelligence.intelligence import Intelligence
 from stt.stt import STT
-from videosdk.stream import MediaStreamTrack
 
 
 class AIInterviewer:
     def __init__(self, loop:asyncio.AbstractEventLoop, audio_track: MediaStreamTrack, stt: STT, intelligence: Intelligence):
-        self.name = "Interviewer"
+        self.name = "SDE Interviewer"
         self.loop = loop
         self.meeting: Meeting = None
         self.stt: STT = stt

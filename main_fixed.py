@@ -2,19 +2,17 @@
 """
 VideoSDK realtime AI Agent | Interviewer
 """
-import asyncio
-import logging
 import os
+import asyncio
 import signal
 import traceback
-
-from dotenv import load_dotenv
-
-from agent.agent import AIInterviewer
+import logging
 from agent.audio_stream_track import CustomAudioStreamTrack
+from tts.deepgram_tts import DeepgramTTS
 from intelligence.groq_intelligence import GroqIntelligence
 from stt.deepgram_stt import DeepgramSTT
-from tts.deepgram_tts import DeepgramTTS
+from agent.agent import AIInterviewer
+from dotenv import load_dotenv
 
 load_dotenv()
 loop = asyncio.new_event_loop()
@@ -37,7 +35,7 @@ async def run():
     """Main function"""
     global agent
     try:
-        print("Loading SDE Interviewer AI Agent...")
+        print("Loading AI Agent...")
         # audio player
         audio_track = CustomAudioStreamTrack(
             loop=loop,
@@ -49,34 +47,16 @@ async def run():
             output_track=audio_track,
         )
         
-        # intelligence client - SDE Interviewer
+        # intelligence client
         intelligence_client = GroqIntelligence( 
             api_key=llm_api_key, 
             model="openai/gpt-oss-120b", 
             tts=tts_client,
             system_prompt=(
-                "You are a Senior Software Development Engineer conducting a comprehensive technical interview. "
-                "Your goal is to assess the candidate's technical skills, problem-solving abilities, and overall fit for software engineering roles. "
-                "\n\nInterview Approach:"
-                "\n- Create a welcoming, collaborative environment"
-                "\n- Begin with introductions and background discussion"
-                "\n- Progress through coding challenges, system design, and behavioral questions"
-                "\n- Adapt difficulty based on candidate's experience level"
-                "\n- Provide constructive feedback and guidance when needed"
-                "\n- Allow adequate time for candidate questions"
-                "\n\nCommunication Style:"
-                "\n- Professional yet approachable and encouraging"
-                "\n- Speak clearly and at a comfortable pace for voice interaction"
-                "\n- Ask thoughtful follow-up questions to understand reasoning"
-                "\n- Provide helpful hints without giving away answers"
-                "\n- Summarize key points and provide clear next steps"
-                "\n\nIMPORTANT: Your responses will be converted to speech. Use natural, conversational language without:"
-                "\n- Asterisks (*) or any text formatting"
-                "\n- Filler words (um, uh, well, basically, actually, like, you know)"
-                "\n- Meta-commentary or stage directions"
-                "\n- Parenthetical notes or asides"
-                "\nSpeak directly to the candidate as if having a natural conversation."
-                "\n\nPlease start by introducing yourself and explaining the interview structure."
+                "You are an AI Copilot in a meeting. Keep responses short and engaging. "
+                "Start by introducing yourself: 'Hi, I'm your AI Copilot!'. "
+                "If asked, explain how you work briefly: 'I process speech using Deepgram STT and reply using Groq LLM.' "
+                "Keep the conversation interactive and avoid long responses unless explicitly requested."
             )
         )
 
@@ -106,7 +86,7 @@ async def destroy():
     """Delete character peer"""
     global agent
     global stopped
-    print("Destroying SDE Interviewer AI Agent...")
+    print("Destroying AI Agent...")
     if agent is not None and not stopped:
         stopped = True
         await agent.leave()
